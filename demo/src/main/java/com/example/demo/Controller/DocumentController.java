@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.Domain.Document;
 import com.example.demo.Services.DocumentService;
 
 @Controller
+@RequestMapping("/user")
 public class DocumentController {
 
     @Autowired
@@ -39,7 +41,7 @@ public class DocumentController {
     @PostMapping("/document/save")
     private String saveDocument(@ModelAttribute Document document) {
         documentService.saveDocument(document);
-        return "redirect:/";
+        return "redirect:/user/";
     }
 
     @GetMapping("/document/edit/{id}")
@@ -59,6 +61,6 @@ public class DocumentController {
     @GetMapping("/document/delete/{id}")
     public String deleteDocument(@PathVariable Long id) {
         documentService.deleteDocument(id);
-        return "redirect:/";
+        return "redirect:/user/";
     }
 }
