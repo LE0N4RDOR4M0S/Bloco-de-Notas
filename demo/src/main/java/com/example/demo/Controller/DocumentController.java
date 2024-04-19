@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.Domain.Document;
 import com.example.demo.Services.DocumentService;
@@ -45,17 +47,18 @@ public class DocumentController {
     }
 
     @GetMapping("/document/edit/{id}")
-    public String editDocument(@PathVariable Long id, Model model) {
+    public ModelAndView editDocument(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("edit_document");
         Document document = documentService.getDocument(id);
-        model.addAttribute("document", document);
-        return "edit_document";
+        modelAndView.addObject("document", document);
+        return modelAndView;
     }
 
     @PostMapping("/document/update/{id}")
     public String updateDocument(@PathVariable Long id, @ModelAttribute Document document) {
         document.setId(id);
         documentService.saveDocument(document);
-        return "redirect:/";
+        return "redirect:/user/";
     }
 
     @GetMapping("/document/delete/{id}")

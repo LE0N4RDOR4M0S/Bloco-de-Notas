@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Documento</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.tiny.cloud/1/skvgqofvr33ywmk8gwa7xbya3blkxs52103e1kwy0lbvfg7p/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .btn {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Editar Documento</h2>
+        <form th:action="@{/user/document/update/{id}(id=${document.id})}" method="post">
+            <div class="form-group">
+                <label for="title">Título:</label>
+                <input type="text" id="title" name="title" class="form-control" th:value="${document.title}" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Conteúdo:</label>
+                <textarea id="content" name="content" class="form-control" th:text="${document.content}"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Atualizar Documento</button>
+        </form>
+    </div>
+    <script>
+        tinymce.init({
+            selector: '#content',
+            plugins: 'lists link image',
+            toolbar: 'undo redo | formatselect | bold italic underline | bullist numlist | link image'
+        });
+    </script>
+</body>
+</html>

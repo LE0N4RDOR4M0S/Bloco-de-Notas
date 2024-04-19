@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentos</title>
+    <title>Notas</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -38,15 +38,21 @@
         .document p {
             margin-top: 0;
         }
+
+        .btn{
+            margin-left: 1%;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Documentos Disponíveis</h2>
+        <h2>Notas Disponíveis</h2>
         <div class="document" th:each="document : ${documents}">
-            <h3 th:text="${document.title}">Título do Documento</h3>
-            <div th:utext="${document.content}">Conteúdo do Documento...</div>
+            <h3 th:text="${document.title}"></h3>
+            <div th:utext="${document.content}"></div>
             <a th:href="@{/user/document/delete/{id}(id=${document.id})}" class="btn btn-danger">Deletar Documento</a>
+            <a th:href="@{/user/document/edit/{id}(id=${document.id})}" class="btn btn-warning">Editar Documento</a>
+            <a th:href="@{/user/document/print/{id}(id=${document.id})}" class="btn btn-info">Mais Opções</a>
         </div>
         <a href="/user/document/new" class="btn btn-success">Criar Novo Documento</a>
     </div>
