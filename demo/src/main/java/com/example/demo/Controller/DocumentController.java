@@ -1,5 +1,7 @@
 package com.example.demo.Controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,6 +43,7 @@ public class DocumentController {
 
     @PostMapping("/document/save")
     private String saveDocument(@ModelAttribute Document document) {
+        document.setData(LocalDate.now());
         documentService.saveDocument(document);
         return "redirect:/user/";
     }
@@ -57,6 +59,7 @@ public class DocumentController {
     @PostMapping("/document/update/{id}")
     public String updateDocument(@PathVariable Long id, @ModelAttribute Document document) {
         document.setId(id);
+        document.setData(LocalDate.now());
         documentService.saveDocument(document);
         return "redirect:/user/";
     }

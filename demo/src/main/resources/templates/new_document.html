@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novo Documento</title>
-    <!-- Adicionando TinyMCE -->
+    <title>Add Nota</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.tiny.cloud/1/skvgqofvr33ywmk8gwa7xbya3blkxs52103e1kwy0lbvfg7p/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <style>
@@ -41,7 +40,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Novo Documento</h2>
+        <h2>Nova Nota</h2>
         <form action="/user/document/save" method="post">
             <div class="form-group">
                 <label for="title">Título:</label>
@@ -51,7 +50,7 @@
                 <label for="content">Conteúdo:</label>
                 <textarea id="content" name="content" class="form-control"></textarea>
             </div>
-            <button type="submit" class="btn btn-success">Salvar Documento</button>
+            <button type="submit" class="btn btn-success">Salvar Nota</button>
         </form>
     </div>
     <script>

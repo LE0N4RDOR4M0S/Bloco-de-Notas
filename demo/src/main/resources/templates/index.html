@@ -42,19 +42,41 @@
         .btn{
             margin-left: 1%;
         }
+
+        .opcoes-janela {
+            display: block;
+            margin-top:10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Notas Disponíveis</h2>
         <div class="document" th:each="document : ${documents}">
+            
             <h3 th:text="${document.title}"></h3>
+            Ultima modificação:<i th:text="${document.Data}"></i>
             <div th:utext="${document.content}"></div>
-            <a th:href="@{/user/document/delete/{id}(id=${document.id})}" class="btn btn-danger">Deletar Documento</a>
-            <a th:href="@{/user/document/edit/{id}(id=${document.id})}" class="btn btn-warning">Editar Documento</a>
-            <a th:href="@{/user/document/print/{id}(id=${document.id})}" class="btn btn-info">Mais Opções</a>
+            <a th:href="@{/user/document/delete/{id}(id=${document.id})}" class="btn btn-danger">Deletar Nota</a>
+            <a th:href="@{/user/document/edit/{id}(id=${document.id})}" class="btn btn-warning">Editar Nota</a>
+            <button class="btn btn-info mais-opcoes-btn" th:id="'opcoes-janela-' + ${document.id}">Mais Opções</button>
+            <div class="opcoes-janela" id="opcoes-janela" style="display: none;">
+                <a th:href="@{/user/document/export/pdf/{id}(id=${document.id})}" class="btn btn-secondary">Exportar como PDF</a>
+                <a th:href="@{/user/document/export/txt/{id}(id=${document.id})}" class="btn btn-secondary">Exportar como TXT</a>
+                <a th:href="@{/user/document/export/docx/{id}(id=${document.id})}" class="btn btn-secondary">Exportar como DOCX</a>
+                <a th:href="@{/user/document/details/{id}(id=${document.id})}" class="btn btn-secondary">Mais Informações</a>
+            </div>
         </div>
-        <a href="/user/document/new" class="btn btn-success">Criar Novo Documento</a>
+        <a href="/user/document/new" class="btn btn-success">Criar Nova Nota</a>
     </div>
+    <script>
+        document.querySelectorAll('.mais-opcoes-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var id = this.getAttribute('id').replace('opcoes-janela');
+                var opcoesJanela = document.getElementById('opcoes-janela');
+                opcoesJanela.style.display = opcoesJanela.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>
