@@ -11,24 +11,46 @@ import com.example.demo.Repository.DocumentRepository;
 @Service
 public class DocumentService {
 
-    @Autowired
-    DocumentRepository documentRepository;
+    public final DocumentRepository documentRepository;
 
+    @Autowired
+    public final DocumentService(DocumentRepository documentRepository){
+        this.documentRepository = documentRepository;
+    }
+
+    /**
+     *
+     * @return todos os documentos no sistema
+     */
     public List<Document> getAllDocuments() {
         return documentRepository.findAll();
     }
 
-    @SuppressWarnings("null")
+    /**
+     *
+     * @param id identificador no documento
+     * @return documento com respectivo id
+     */
     public Document getDocument(Long id) {
         return documentRepository.findById(id).orElse(null);
     }
 
-    @SuppressWarnings("null")
+    /**
+     *
+     * @param document documento a ser salvo
+     */
     public void saveDocument(Document document) {
         documentRepository.save(document);
     }
 
-    @SuppressWarnings("null")
+    public Document updateDocument(Long id, Document new_document){
+        Optional<Document>
+    }
+
+    /**
+     *
+     * @param id identificadro do documento a ser deletado
+     */
     public void deleteDocument(Long id) {
         documentRepository.deleteById(id);
     }
